@@ -140,7 +140,7 @@ MovieLens 데이터셋 평가 시에는 GATConv, RatingConv, PopConv 3개를 사
 
 ## 결과 및 평가
 
-학습된 모델의 평가 결과는 `성능평가_V6.xlsx` 파일에서 확인할 수 있습니다.  
+학습된 모델의 평가 결과는 `성능평가_V7.xlsx` 파일에서 확인할 수 있습니다.  
 평가 지표로는 Recall, Precision, NDCG 등을 사용하였습니다.  
 학습 과정에서 생성된 모델과 평가 결과는 각 모델의 BestModel 디렉토리에 저장됩니다.  
 
