@@ -1,7 +1,0 @@
-
-파일 실행시 전체적으로 데이터셋 위치를 수정하여야 합니다.
-
-[절대경로 하드코딩된 파일]
-./GraphMaker/make_graph.py -> 23~27라인
-./DataLoader/load_dataset.py -> 10~12라인
-

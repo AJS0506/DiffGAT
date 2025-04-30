@@ -28,15 +28,15 @@ def set_random_seed(seed):
     torch.backends.cudnn.deterministic = False
     torch.backends.cudnn.benchmark = True
 
-RANDOM_SEED = 1004
+RANDOM_SEED = 1008
 set_random_seed(RANDOM_SEED)
 
 # 4대의 GPU머신에서 테스트했습니다.
-# 편의상 병렬 학습하기 위해 GPU설정 탭에서 f"cuda:{DATASET_NUMBER}" 로 GPU가 설정됩니다. -> 116라인에 GPU 설정 코드입니다.
-DATASET_NUMBER = 3
+# 편의상 병렬 학습하기 위해 GPU설정 탭에서 f"cuda:{DATASET_NUMBER}" 로 GPU가 설정됩니다. 
+DATASET_NUMBER = 4
 
 # ============= 데이터셋 정의 =============
-dataset_list = ["gowalla", "movielens_small", "movielens_25M", "netflixPrize"]
+dataset_list = ["gowalla", "movielens_small", "movielens_25M", "netflixPrize", "filmtrust"]
 DATA_SET = dataset_list[DATASET_NUMBER]
 
 # ============= 학습, 검증, 테스트 데이터셋 로드 =============
@@ -113,7 +113,7 @@ for uid, mid, ts, rating in train_set:
 
 
 # ============= 학습 모델 초기화 및 GPU 설정 =============
-device = torch.device(f"cuda:{DATASET_NUMBER}" if torch.cuda.is_available() else "cpu")
+device = torch.device(f"cuda:1" if torch.cuda.is_available() else "cpu")
 graph = graph.to(device)
 embedding_dim = 128
 first_layer_dim = 64
@@ -303,12 +303,17 @@ model.eval()
 with torch.no_grad():
     test_hidden = model(graph)
 
-# 1) 평가지표 뽑기
+# test_processor = calcEvaluationScore(test_set, test_hidden, folder_path)
+# avg_recall, avg_precision, avg_ndcg = test_processor.calcScore()
+
+# tracker = TrainTracker(train_loss_tracker, val_loss_tracker, avg_recall, avg_precision, avg_ndcg, folder_path)
+# tracker.plot_results()
+
 test_processor = calcEvaluationScore(test_set, test_hidden, folder_path, DATA_SET)
 (macro_recall, macro_precision, macro_ndcg,
  micro_recall, micro_precision, micro_ndcg) = test_processor.calcScore()
 
-# 2) 트래커 ㄱㄱㄱ (텍스트 파일에 정확한 수치값들 저장)
+# 2) 트래커 ㄱㄱㄱ
 tracker = TrainTracker(
     train_loss_tracker, 
     val_loss_tracker,
@@ -317,7 +322,7 @@ tracker = TrainTracker(
     folder_path
 )
 
-# 3) 결과 저장
+# 3) 결과 플롯 및 저장
 tracker.plot_results()
 
 

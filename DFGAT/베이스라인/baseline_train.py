@@ -49,13 +49,13 @@ def set_random_seed(seed):
     torch.manual_seed(seed)          # PyTorch CPU 시드
     torch.cuda.manual_seed(seed)     # PyTorch GPU 시드 (Single GPU)
     torch.cuda.manual_seed_all(seed) # Multi-GPU도 쓰는 경우
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.deterministic = False
+    torch.backends.cudnn.benchmark = True
 
 set_random_seed(RANDOM_SEED)
 
 # ============= 데이터셋 정의 =============
-dataset_list = ["gowalla", "movielens_small", "movielens_25M", "netflixPrize"]
+dataset_list = ["gowalla", "movielens_small", "movielens_25M", "netflixPrize", "filmtrust"]
 DATA_SET = dataset_list[DATASET_NUMBER]
 
 # ============= 데이터셋으로 그래프 만들기 =============
