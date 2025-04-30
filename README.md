@@ -145,7 +145,8 @@ MovieLens 데이터셋 평가 시에는 GATConv, RatingConv, PopConv 3개를 사
 학습 과정에서 생성된 모델과 평가 결과는 각 모델의 BestModel 디렉토리에 저장됩니다.  
 
 
-<img width="618" alt="image" src="https://github.com/user-attachments/assets/4a14217e-a680-47bd-b8f0-c82c84b6da09" />
+<img width="884" alt="image" src="https://github.com/user-attachments/assets/76cf1de8-74fa-4b4f-9d56-b6b7d7451ade" />
+
 
 
 
